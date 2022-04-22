@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include <stdio.h> 
 #include <iostream>
+#include <string>
+#include "MemoryEditorConfig.h"
+#include "MemoryFunctions.hpp"
 
-bool reading_memory(mach_port_t task,uintptr_t memoryAddress,uintptr_t data_out,uint32_t bytes_read);
+
 int input_type();
-bool writing_memory_int(mach_port_t task,uintptr_t memoryAddress,int int_value);
 
 int main(int argc, char* argv[] ){
     kern_return_t ker_ret;
@@ -17,6 +19,10 @@ int main(int argc, char* argv[] ){
     int pid;
     int int_value;
     int reason;
+
+    // report version
+    std::cout << "MemoryEditor" << " Version " << MemoryEditor_VERSION_MAJOR << "." 
+    <<  MemoryEditor_VERSION_MINOR << std::endl;
 
     //Grabbing task for pid
     std::cout << "Enter pid: ";
@@ -60,36 +66,6 @@ int main(int argc, char* argv[] ){
     return 0;
 
 }
-
-bool reading_memory(mach_port_t task,uintptr_t memoryAddress,uintptr_t data_out,uint32_t bytes_read){    
-    int reason;
-    if ((reason = vm_read(task, memoryAddress,sizeof(int),&data_out,&bytes_read ))!= KERN_SUCCESS) {
-        std::cout << "Failed to read "<< reason << std::endl;
-        std::cout << "Exiting application." << std::endl;
-        return false;
-    }
-    else{
-        std::cout << "Successful Read" << std::endl;
-        //Results
-        std::cout << "Value at 0x" << std::hex << std::uppercase << memoryAddress << " :" ;
-        std::cout << *(int*) data_out << std::endl;
-    }
-    return true;
-}
-
-
-bool writing_memory_int(mach_port_t task,uintptr_t memoryAddress,int int_value){
-    int reason;
-    std::cout << "Enter new value: " << std::endl;
-    std::cin >> int_value;
-    if ((reason = vm_write(task, memoryAddress,(uintptr_t) &int_value, sizeof(int))) != KERN_SUCCESS) {
-        std::cout << "Failed to write: " << reason << std::endl;
-        std::cout << "Exiting Applicatin" << std::endl;
-        return false;
-    }
-    return true;
-}
-
 
 int input_type(){
     int type = -1;
