@@ -41,7 +41,7 @@ int main(int argc, char* argv[] ){
     std::cin >> std::hex >> memoryAddress;
     std::cout << "Reading 0x" << std::hex << std::uppercase << memoryAddress << " ..." << std::endl;
     //reading from PID at memory address
-    if(!reading_memory(task,memoryAddress,data_out,bytesRead)){
+    if(!reading_memory_int(task,memoryAddress,data_out,bytesRead)){
         return 0;
     }
     //change value at memory location
@@ -55,7 +55,7 @@ int main(int argc, char* argv[] ){
                     return 0;
                 }
                 std::cout << "Successful write" << std::endl;
-                if(!reading_memory(task,memoryAddress,data_out,bytesRead)){
+                if(!reading_memory_int(task,memoryAddress,data_out,bytesRead)){
                     return 0;
                 }
                 break;
