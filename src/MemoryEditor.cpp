@@ -21,6 +21,8 @@ int main(int argc, char* argv[] ){
     int pid;
     int int_value;
     int reason;
+    std::string string_val;
+    char char_val;
 
     // report version
     std::cout << "MemoryEditor" << " Version " << MemoryEditor_VERSION_MAJOR << "." 
@@ -50,7 +52,7 @@ int main(int argc, char* argv[] ){
         select = input_type();
         switch(select){
             case 0:
-                if(!writing_memory(task, memoryAddress, (uintptr_t) int_value)){
+                if(!writing_memory(task, memoryAddress, (int) int_value)){
                     return 0;
                 }
                 std::cout << "Successful write" << std::endl;
@@ -59,7 +61,6 @@ int main(int argc, char* argv[] ){
                 }
                 break;
             case 1:
-                std::string string_val;
                 if(!writing_memory(task, memoryAddress, (std::string) string_val)){
                     return 0;
                 }
@@ -68,6 +69,14 @@ int main(int argc, char* argv[] ){
                     return 0;
                 }
                 break;
+            case 2:
+                if(!writing_memory(task, memoryAddress, (char) char_val)){
+                    return 0;
+                }
+                std::cout << "Successful write" << std::endl;
+                if(!reading_memory(task, memoryAddress, data_out, bytesRead)){
+                    return 0;
+                }
         }
         std::cout << "Continue? (Q|q to quit): ";
         std::cin >> option;
@@ -86,9 +95,9 @@ uintptr_t input_address(uintptr_t memoryAddress) {
 
 int input_type(){
     int type = -1;
-    std::cout << "Which data type? (Supported Options: 0 - int , 1 - std::string )" << std::endl;
+    std::cout << "Which data type? (Supported Options: 0 - int , 1 - std::string, 2 - char )" << std::endl;
     std::cin >> type;
-    while(!std::cin || (type != 0 && type != 1)){
+    while(!std::cin || (type != 0 && type != 1 && type != 2)){
             std::cout << "Invalid input" << std::endl;
             std::cin.clear();
             std::cin.ignore();

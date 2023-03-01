@@ -29,3 +29,15 @@ bool writing_memory(mach_port_t task, uintptr_t memoryAddress, std::string strin
     }
     return true;
 }
+
+bool writing_memory(mach_port_t task, uintptr_t memoryAddress, char char_val){
+    int reason;
+    std::cout << "Enter a new char " << std::endl;
+    std::cin >> char_val;
+    if ((reason = vm_write(task, memoryAddress,(pointer_t) &char_val, sizeof(char))) != KERN_SUCCESS) {
+        std::cout << "Failed to write: " << reason << std::endl;
+        std::cout << "Exiting Application" << std::endl;
+        return false;
+    }
+    return true;
+}
