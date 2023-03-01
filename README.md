@@ -1,10 +1,15 @@
 # Memory Editor for macOS
 
-Memory Editor for macOs V 0.1
+Memory Editor for macOS V 0.1
+
+## Motivation
+Windows has a fairly standard process to editing memory using their api. 
+This programs aims to serve as introduction to using the macOS api.
+
 
 ## Features
 
-Currenly supportes modifying int values.
+Currenly supportes modifying int values, std::string, and char. 
 
 ## Prerequisites
 
@@ -44,6 +49,7 @@ and run with ./dummyprogram
 This program will display a few different data types and their memory location.
 
 Run MemoryEditor and follow the script.
+
 
 ## TODO
 
