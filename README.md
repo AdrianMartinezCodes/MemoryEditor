@@ -4,7 +4,7 @@ Memory Editor for macOS V 0.1
 
 ## Motivation
 Windows has a fairly standard process to editing memory using their api. 
-This programs aims to serve as introduction to using the macOS api.
+This programs aims to serve as introduction to using the macOS api in this context.
 
 
 ## Features
@@ -56,3 +56,8 @@ Run MemoryEditor and follow the script.
 * Support more data types
 * Memory Scanner
 * Add a gui
+
+## Further Reading
+For an indepth implementaion, I'll happily point you all to the wonderful program
+[Bit Slicer](https://github.com/zorgiepoo/Bit-Slicer).
+I don't aim to replace this, just help unravel the mysterious of macOs.
